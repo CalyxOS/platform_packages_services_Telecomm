@@ -51,6 +51,24 @@
       "message": "This is a security patch, it\u0027s already included in 14",
       "revId": "5f92eac951b1c2454b80e0623509c851c17259b6",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "649c24f5_1f86dee4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-10-05T17:25:03Z",
+      "side": 1,
+      "message": "4.9.0\n\nhttps://android.googlesource.com/platform/packages/services/Telecomm/+log/android-13.0.0_r43",
+      "parentUuid": "ebdbef0a_b23b4f9e",
+      "revId": "5f92eac951b1c2454b80e0623509c851c17259b6",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
