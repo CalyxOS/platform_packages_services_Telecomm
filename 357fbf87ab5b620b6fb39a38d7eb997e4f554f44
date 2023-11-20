@@ -16,6 +16,41 @@
       "message": "Best examined with trailing and leading whitespace ignored.",
       "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04734460_f5ca0522",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-20T22:49:50Z",
+      "side": 1,
+      "message": "Gerrit handles that nicely 😊",
+      "parentUuid": "04a8b70c_a9bd8b85",
+      "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ba2164_b7a5f155",
+        "filename": "src/com/android/server/telecom/components/UserCallIntentProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-20T22:49:50Z",
+      "side": 1,
+      "message": "You also said \"copy over the phone app, and get phone access that way.\"",
+      "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
