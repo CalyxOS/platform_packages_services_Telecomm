@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a8b70c_a9bd8b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2023-11-20T21:32:27Z",
+      "side": 1,
+      "message": "Best examined with trailing and leading whitespace ignored.",
+      "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
