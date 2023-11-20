@@ -65,35 +65,35 @@ public final class UserUtil {
         }
 
         if(!isSelfManaged) {
-            // Check DISALLOW_OUTGOING_CALLS restriction. Note: We are skipping this
-            // check in a managed profile user because this check can always be bypassed
-            // by copying and pasting the phone number into the personal dialer.
-            if (!UserUtil.isManagedProfile(context, userHandle)) {
-                // Only emergency calls are allowed for users with the DISALLOW_OUTGOING_CALLS
-                // restriction.
-                if (!TelephonyUtil.shouldProcessAsEmergency(context, handle)) {
-                    final UserManager userManager =
-                            (UserManager) context.getSystemService(Context.USER_SERVICE);
-                    if (userManager.hasBaseUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
-                            userHandle)) {
-                        String reason = "of DISALLOW_OUTGOING_CALLS restriction";
-                        showErrorDialogForRestrictedOutgoingCall(context,
-                                R.string.outgoing_call_not_allowed_user_restriction, tag, reason);
-                        return true;
-                    } else if (userManager.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
-                            userHandle)) {
-                        final DevicePolicyManager dpm =
-                                context.getSystemService(DevicePolicyManager.class);
-                        if (dpm == null) {
-                            return true;
-                        }
-                        final Intent adminSupportIntent = dpm.createAdminSupportIntent(
-                                UserManager.DISALLOW_OUTGOING_CALLS);
-                        if (adminSupportIntent != null) {
-                            context.startActivityAsUser(adminSupportIntent, userHandle);
-                        }
+            // Check DISALLOW_OUTGOING_CALLS restriction. Note: For managed profile users,
+            // we are checking the parent's restrictions instead, because this check can always
+            // be bypassed by copying and pasting the phone number into the personal dialer.
+            final UserManager userManager =
+                    (UserManager) context.getSystemService(Context.USER_SERVICE);
+            final UserHandle userHandleToCheck = !UserUtil.isManagedProfile(context, userHandle)
+                    ? userHandle : userManager.getProfileParent(userHandle);
+            // Only emergency calls are allowed for users with the DISALLOW_OUTGOING_CALLS
+            // restriction.
+            if (!TelephonyUtil.shouldProcessAsEmergency(context, handle)) {
+                if (userManager.hasBaseUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
+                        userHandleToCheck)) {
+                    String reason = "of DISALLOW_OUTGOING_CALLS restriction";
+                    showErrorDialogForRestrictedOutgoingCall(context,
+                            R.string.outgoing_call_not_allowed_user_restriction, tag, reason);
+                    return true;
+                } else if (userManager.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
+                        userHandleToCheck)) {
+                    final DevicePolicyManager dpm =
+                            context.getSystemService(DevicePolicyManager.class);
+                    if (dpm == null) {
                         return true;
                     }
+                    final Intent adminSupportIntent = dpm.createAdminSupportIntent(
+                            UserManager.DISALLOW_OUTGOING_CALLS);
+                    if (adminSupportIntent != null) {
+                        context.startActivityAsUser(adminSupportIntent, userHandle);
+                    }
+                    return true;
                 }
             }
         }
