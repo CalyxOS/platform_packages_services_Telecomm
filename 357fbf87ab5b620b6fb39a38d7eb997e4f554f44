@@ -87,6 +87,24 @@
       "parentUuid": "471d248c_05669169",
       "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6828caba_641d1151",
+        "filename": "src/com/android/server/telecom/components/UserCallIntentProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2023-11-20T22:56:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5f0f9f64_5a47bd7b",
+      "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
