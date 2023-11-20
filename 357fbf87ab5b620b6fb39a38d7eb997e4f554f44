@@ -51,6 +51,24 @@
       "message": "You also said \"copy over the phone app, and get phone access that way.\"",
       "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
       "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "471d248c_05669169",
+        "filename": "src/com/android/server/telecom/components/UserCallIntentProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2023-11-20T22:52:34Z",
+      "side": 1,
+      "message": "The original comment is from AOSP. Apparently they don\u0027t think it\u0027s not worth checking the restriction for managed profiles for the reason you highlighted.\n\nAs for what you\u0027re saying, that\u0027s the issue, yes, but that\u0027s the exact issue that (seemingly) AOSP thinks makes the check pointless. Since AOSP doesn\u0027t support work profiles in secondary users, they aren\u0027t considering that.",
+      "parentUuid": "65ba2164_b7a5f155",
+      "revId": "357fbf87ab5b620b6fb39a38d7eb997e4f554f44",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
     }
   ]
 }
