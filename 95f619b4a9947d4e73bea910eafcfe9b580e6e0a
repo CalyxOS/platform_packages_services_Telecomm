@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6c0a36_e2353d43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2023-12-07T21:08:06Z",
+      "side": 1,
+      "message": "Test: Manual: Create a work profile in a secondary user. (The secondary user must not have phone \u0026 SMS permissions.) Try to make a call in the secondary user. \"Only emergency calls are allowed.\" Install the dialer in the secondary user\u0027s work profile, e.g. `adb shell pm install-existing --user 11 com.android.dialer` (if it\u0027s user ID 11). The same error should appear in the work profile.",
+      "revId": "95f619b4a9947d4e73bea910eafcfe9b580e6e0a",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
