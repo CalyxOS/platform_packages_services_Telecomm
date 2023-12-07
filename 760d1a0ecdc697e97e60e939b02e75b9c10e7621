@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ebb941_aaa8aa0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2023-12-07T21:12:52Z",
+      "side": 1,
+      "message": "QPR1-adapted patch is in relation chain.",
+      "revId": "760d1a0ecdc697e97e60e939b02e75b9c10e7621",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
