@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e711a4e6_3c2f310d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000062
+      },
+      "writtenOn": "2023-12-07T22:08:59Z",
+      "side": 1,
+      "message": "I haven\u0027t been able to truly test this yet (phone is not working with my messed-up vendor files).",
+      "revId": "ef00380ad3b638a94f065ce35bcba8d1ba34abf5",
+      "serverId": "35266860-6252-469c-a67d-185064479fc0"
+    }
+  ]
+}
