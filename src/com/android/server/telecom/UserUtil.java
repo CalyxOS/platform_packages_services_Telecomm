@@ -36,18 +36,28 @@ public final class UserUtil {
     }
 
     private static UserInfo getUserInfoFromUserHandle(Context context, UserHandle userHandle) {
-        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        UserManager userManager = context.getSystemService(UserManager.class);
         return userManager.getUserInfo(userHandle.getIdentifier());
     }
 
-    public static boolean isManagedProfile(Context context, UserHandle userHandle) {
+    public static boolean isManagedProfile(Context context, UserHandle userHandle,
+            FeatureFlags featureFlags) {
+        UserManager userManager = context.createContextAsUser(userHandle, 0)
+                .getSystemService(UserManager.class);
         UserInfo userInfo = getUserInfoFromUserHandle(context, userHandle);
-        return userInfo != null && userInfo.isManagedProfile();
+        return featureFlags.telecomResolveHiddenDependencies()
+                ? userManager != null && userManager.isManagedProfile()
+                : userInfo != null && userInfo.isManagedProfile();
     }
 
-    public static boolean isProfile(Context context, UserHandle userHandle) {
+    public static boolean isProfile(Context context, UserHandle userHandle,
+            FeatureFlags featureFlags) {
+        UserManager userManager = context.createContextAsUser(userHandle, 0)
+                .getSystemService(UserManager.class);
         UserInfo userInfo = getUserInfoFromUserHandle(context, userHandle);
-        return userInfo != null && userInfo.profileGroupId != userInfo.id;
+        return featureFlags.telecomResolveHiddenDependencies()
+                ? userManager != null && userManager.isProfile()
+                : userInfo != null && userInfo.profileGroupId != userInfo.id;
     }
 
     public static void showErrorDialogForRestrictedOutgoingCall(Context context,
@@ -61,7 +71,8 @@ public final class UserUtil {
     }
 
     public static boolean hasOutgoingCallsUserRestriction(Context context,
-            UserHandle userHandle, Uri handle, boolean isSelfManaged, String tag) {
+            UserHandle userHandle, Uri handle, boolean isSelfManaged, String tag,
+            FeatureFlags featureFlags) {
         // Set handle for conference calls. Refer to {@link Connection#ADHOC_CONFERENCE_ADDRESS}.
         if (handle == null) {
             handle = Uri.parse("tel:conf-factory");
@@ -71,10 +82,14 @@ public final class UserUtil {
             // Check DISALLOW_OUTGOING_CALLS restriction. Note: For managed profile users,
             // we are checking the parent's restrictions instead, because this check can always
             // be bypassed by copying and pasting the phone number into the personal dialer.
-            final UserManager userManager =
-                    (UserManager) context.getSystemService(Context.USER_SERVICE);
-            final UserHandle userHandleToCheck = !UserUtil.isManagedProfile(context, userHandle)
-                    ? userHandle : userManager.getProfileParent(userHandle);
+            final UserManager userManager = context.getSystemService(UserManager.class);
+            boolean hasUserRestriction = featureFlags.telecomResolveHiddenDependencies()
+                    ? userManager.hasUserRestrictionForUser(
+                            UserManager.DISALLOW_OUTGOING_CALLS, userHandle)
+                    : userManager.hasUserRestriction(
+                            UserManager.DISALLOW_OUTGOING_CALLS, userHandle);
+            final UserHandle userHandleToCheck = !UserUtil.isManagedProfile(context, userHandle,
+                    featureFlags) ? userHandle : userManager.getProfileParent(userHandle);
             // Only emergency calls are allowed for users with the DISALLOW_OUTGOING_CALLS
             // restriction.
             if (!TelephonyUtil.shouldProcessAsEmergency(context, handle)) {
@@ -84,8 +99,7 @@ public final class UserUtil {
                     showErrorDialogForRestrictedOutgoingCall(context,
                             R.string.outgoing_call_not_allowed_user_restriction, tag, reason);
                     return true;
-                } else if (userManager.hasUserRestriction(UserManager.DISALLOW_OUTGOING_CALLS,
-                        userHandleToCheck)) {
+                } else if (hasUserRestriction) {
                     final DevicePolicyManager dpm =
                             context.getSystemService(DevicePolicyManager.class);
                     if (dpm == null) {
